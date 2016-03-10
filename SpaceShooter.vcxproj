@@ -42,6 +42,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -85,36 +86,37 @@ xcopy "$(SolutionDir)\media" "$(TargetDir)\media" /e /y /i /r</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Explosion.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Missile.cpp" />
-    <ClCompile Include="Vec2.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="System.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="Constants.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Explosion.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Missile.h" />
-    <ClInclude Include="Random.h" />
-    <ClInclude Include="Spatial.h" />
-    <ClInclude Include="System.h" />
-    <ClInclude Include="Team.h" />
-    <ClInclude Include="Text.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="Util.h" />
-    <ClInclude Include="Vec2.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Texture.h" />
+    <ClCompile Include="src\Animation.cpp" />
+    <ClCompile Include="src\Enemy.cpp" />
+    <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\Explosion.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Missile.cpp" />
+    <ClCompile Include="src\Vec2.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\System.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
+    <ClInclude Include="include\Animation.h" />
+    <ClInclude Include="include\Constants.h" />
+    <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\Entity.h" />
+    <ClInclude Include="include\Explosion.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\Missile.h" />
+    <ClInclude Include="include\Random.h" />
+    <ClInclude Include="include\Spatial.h" />
+    <ClInclude Include="include\System.h" />
+    <ClInclude Include="include\Team.h" />
+    <ClInclude Include="include\Text.h" />
+    <ClInclude Include="include\Timer.h" />
+    <ClInclude Include="include\Util.h" />
+    <ClInclude Include="include\Vec2.h" />
+    <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="libfreetype-6.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
