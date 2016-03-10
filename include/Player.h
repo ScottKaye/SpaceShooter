@@ -17,8 +17,6 @@ class Player : public Entity {
 public:
 	Player(const Vec2& pos, const Texture* tex);
 
-	bool					Alive;
-
 	float					Energy() const { return mEnergy; }
 	float					Spread() const { return mSpread; }
 	float					MissileSpeed() const { return mMissileSpeed; }
@@ -34,9 +32,7 @@ public:
 	float                   Speed() const { return mSpeed; }
 	void                    SetSpeed(float speed) { mSpeed = speed; }
 
-	virtual bool			CollidesWith(Entity* ent) const;
-	virtual bool			Update(float dt);
-	virtual void			Draw(SDL_Renderer* renderer) const;
-	virtual void			Destroy();
-	virtual void			Shoot();
+	bool					Update(float dt) override;
+	void					Destroy() override;
+	void					Shoot() override;
 };

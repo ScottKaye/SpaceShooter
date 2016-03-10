@@ -31,9 +31,10 @@ public:
 
 	Vec2					Center;
 	Vec2					Velocity;
-	bool					KillOnOffscreen = true;
-	bool					Garbage = false;
-	float					CollisionDamage = 100;
+	bool					Alive = true;				// If an entity is not alive, it will not be drawn and will not collide with other entities
+	bool					KillOnOffscreen = true;		// If an entity goes offscreen, kill it?
+	bool					Garbage = false;			// Used to define if an entity should be deleted.  Entities are kept around until the beginning of the next frame
+	float					CollisionDamage = 100;		// How much damage to deal to the entity that collides with this
 
 	float                   Left() const { return Center.x - 0.5f * Width(); }
 	float                   Right() const { return Center.x + 0.5f * Width(); }

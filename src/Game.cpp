@@ -79,15 +79,21 @@ void Game::Shutdown() {
 	}
 	Entities.clear();
 
+	// Delete explosions
+	for (unsigned i = 0; i < Explosions.size(); ++i) {
+		delete Explosions[i];
+	}
+	Explosions.clear();
+
+	// Delete spatial hash map
+	delete mSpatial;
+
 	// Release audio
 	Mix_FreeChunk(ShotSound);
 
 	// Close fonts
 	TTF_CloseFont(mFontSmall);
 	TTF_CloseFont(mFontLarge);
-
-	// Delete spatial hash map
-	mSpatial->Destroy();
 
 	// Destroy all textures
 	Texture::Destroy(ShuttleTex);

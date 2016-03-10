@@ -17,7 +17,6 @@ Player::Player(const Vec2& pos, const Texture* tex)
 	, mCannons(3)
 	, mEnergy(100)
 	, mMissileSpeed(400)
-	, Alive(true)
 {
 	SetExplosionSize(2);
 	SetHealthBarVisibile(true);
@@ -25,7 +24,6 @@ Player::Player(const Vec2& pos, const Texture* tex)
 }
 
 bool Player::Update(float dt) {
-	// Dead players actually exist in limbo
 	if (!Alive) return false;
 
 	// Health bar
@@ -118,22 +116,6 @@ void Player::Shoot() {
 	}
 }
 
-void Player::Draw(SDL_Renderer* renderer) const {
-	// Do not draw dead players
-	if (!Alive) return;
-
-	Entity::Draw(renderer);
-}
-
-bool Player::CollidesWith(Entity* ent) const {
-	// TODO broken
-	std::cout << "checking player collide" << std::endl;
-	// Dead players are ghosts
-	if (!Alive) return false;
-
-	return Entity::CollidesWith(ent);
-}
-
 void Player::DrainEnergy(float amount) {
 	if (NODRAIN) return;
 
@@ -151,7 +133,9 @@ void Player::RestoreEnergy(float amount) {
 }
 
 void Player::Destroy() {
-	std::cout << "Player destroyed" << std::endl;
+	std::cout << "Player destroyed!" << std::endl;
 
+	Alive = false;
+	SetHealth(0);
 	Game::DestroyPlayer();
 }

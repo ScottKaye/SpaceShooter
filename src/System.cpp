@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vld.h>
 
 #include "System.h"
 #include "Timer.h"
@@ -223,6 +224,5 @@ int main(int argc, char** argv) {
 	SDL_Quit();
 
 	std::cout << "Goodbye!" << std::endl;
-
 	return 0;
 }

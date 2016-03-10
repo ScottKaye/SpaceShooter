@@ -44,14 +44,14 @@ public:
 		ClearCells();
 	}
 
+	~Spatial() {
+		mCells.clear();
+	}
+
 	int Rows() const { return mRows; }
 	int Cols() const { return mCols; }
 	int Cellsize() const { return mCellsize; }
 	std::map<unsigned, std::vector<Entity*>> Cells() { return mCells; }
-
-	void Destroy() {
-		mCells.clear();
-	}
 
 	void ClearCells() {
 		mCells.clear();

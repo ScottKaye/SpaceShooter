@@ -20,6 +20,9 @@ Entity::Entity(const Vec2& pos, const Texture* tex, Team team)
 
 // Return true if the entity was destroyed this frame
 bool Entity::Update(float dt) {
+	// "Dead" entities are in limbo
+	if (!Alive) return false;
+
 	++mLifetime;
 
 	Center.x += Velocity.x * dt;
@@ -70,6 +73,9 @@ void Entity::ConfineToScreen() {
 }
 
 void Entity::Draw(SDL_Renderer* renderer) const {
+	// "Dead" entities are not drawn
+	if (!Alive) return;
+
 	// Check if we have a valid texture
 	if (mTex) {
 		// Compute rectangle on screen
@@ -112,6 +118,9 @@ void Entity::Draw(SDL_Renderer* renderer) const {
 }
 
 bool Entity::CollidesWith(Entity* ent) const {
+	// "Dead" entities do not collide
+	if (!Alive || !ent->Alive) return false;
+
 	SDL_Rect r1 = { (int)Left(), (int)Top(), (int)Width(), (int)Height() };
 	SDL_Rect r2 = { (int)ent->Left(), (int)ent->Top(), (int)ent->Width(), (int)ent->Height() };
 
@@ -140,8 +149,8 @@ bool Entity::Hit(float damage) {
 	return false;
 }
 
+// Create an explosion at the current location and remove the entity
 void Entity::Explode() {
-	// Create an explosion at the current location
 	float scale = mExplosionSize * RandomFloatInclusive(0.85F, 1.15F);
 	Explosion* e = new Explosion(Center, Game::ExplosionTex, scale);
 	Game::Explosions.push_back(e);
@@ -149,7 +158,9 @@ void Entity::Explode() {
 	Destroy();
 }
 
+// Remove the entity from the game
 void Entity::Destroy() {
+	Alive = false;
 	Game::DestroyEntityById(GetId());
 }
 
