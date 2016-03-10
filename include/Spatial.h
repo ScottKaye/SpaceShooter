@@ -1,7 +1,7 @@
 #pragma once
 
-//Spatial hashing manager adapted and modified from
-//https://conkerjo.wordpress.com/2009/06/13/spatial-hashing-implementation-for-fast-2d-collisions/
+// Spatial hashing manager adapted and modified from
+// https://conkerjo.wordpress.com/2009/06/13/spatial-hashing-implementation-for-fast-2d-collisions/
 
 #include <map>
 #include <vector>
@@ -24,9 +24,9 @@ class Spatial {
 	}
 
 	void AddToCell(unsigned cellId, Entity* e) {
-		//Technically, we should check if the entity already exists in the map, and if so, not add it
-		//This adds a huge amount of overhead that isn't necessary, as the map is cleared and repopulated every frame anyway
-		//So here, just naively add the entity
+		// Technically, we should check if the entity already exists in the map, and if so, not add it
+		// This adds a huge amount of overhead that isn't necessary, as the map is cleared and repopulated every frame anyway
+		// So here, just naively add the entity
 		mCells[cellId].push_back(e);
 	}
 
@@ -57,19 +57,19 @@ public:
 		mCells.clear();
 	}
 
-	//Add an entity to the spatial map
+	// Add an entity to the spatial map
 	void Register(Entity* e) {
 		auto cellId = GetCellId(e);
 		AddToCell(cellId, e);
 	}
 
-	//Remove an emeity from the spatial map
+	// Remove an emeity from the spatial map
 	void Unregister(Entity* e) {
 		auto cellId = GetCellId(e);
 		RemoveFromCell(cellId, e);
 	}
 
-	//Get a list of all entitys in the same cell as the given entity
+	// Get a list of all entitys in the same cell as the given entity
 	std::vector<Entity*> GetNearby(Entity* e) {
 		auto cellId = GetCellId(e);
 		return mCells[cellId];

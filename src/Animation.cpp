@@ -1,6 +1,8 @@
-#include "Animation.h"
+// Animation class created by Lukasz Wawrzyniak
 
 #include <cmath>
+
+#include "Animation.h"
 
 Animation::Animation(const Texture* tex, int numCells, float duration, bool loopable)
 	: mTex(tex)
@@ -13,31 +15,28 @@ Animation::Animation(const Texture* tex, int numCells, float duration, bool loop
 {
 }
 
-void Animation::AddTime(float dt)
-{
+void Animation::AddTime(float dt) {
 	mTime += dt;
 
-	// see if we've reached or passed the end
+	// See if we've reached or passed the end
 	if (mTime >= mDuration) {
 		if (mIsLoopable) {
-			// wrap around
+			// Wrap around
 			mTime = std::fmod(mTime, mDuration);
 		}
 		else {
-			// cap
+			// Cap
 			mTime = mDuration;
 		}
 	}
 }
 
-bool Animation::FinishedPlaying() const
-{
+bool Animation::FinishedPlaying() const {
 	return mTime == mDuration;
 }
 
-void Animation::DrawCurrentCell(SDL_Renderer* renderer, const SDL_Rect* dstRect)
-{
-	// figure out which cell we should be showing
+void Animation::DrawCurrentCell(SDL_Renderer* renderer, const SDL_Rect* dstRect) {
+	// Figure out which cell we should be showing
 	int cellIndex;
 	if (mTime <= 0.0f) {
 		cellIndex = 0;
@@ -49,13 +48,13 @@ void Animation::DrawCurrentCell(SDL_Renderer* renderer, const SDL_Rect* dstRect)
 		cellIndex = (int)(mTime / mDuration * mNumCells);
 	}
 
-	// compute source rectangle of cell in the texture
+	// Compute source rectangle of cell in the texture
 	SDL_Rect srcRect;
 	srcRect.x = cellIndex * mCellWidth;
 	srcRect.y = 0;
 	srcRect.w = mCellWidth;
 	srcRect.h = mCellHeight;
 
-	// draw current cell in the specified screen rectangle
+	// Draw current cell in the specified screen rectangle
 	SDL_RenderCopy(renderer, mTex->GetSDLTexture(), &srcRect, dstRect);
 }

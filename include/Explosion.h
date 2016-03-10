@@ -1,15 +1,12 @@
-#ifndef EXPLOSION_H_
-#define EXPLOSION_H_
+#pragma once
 
 #include "Animation.h"
 #include "Vec2.h"
 
-class Explosion
-{
+class Explosion {
 	Animation*              mAnim;
 	Vec2                    mCenter;
 	float					mScale;
-
 
 public:
 	Explosion(const Vec2& pos, const Texture* tex, float scale);
@@ -19,5 +16,3 @@ public:
 	bool                    IsFinished() const;
 	void					Draw(SDL_Renderer* renderer) const;
 };
-
-#endif

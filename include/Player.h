@@ -1,5 +1,4 @@
-#ifndef PLAYER_H_
-#define PLAYER_H_
+#pragma once
 
 #include "Entity.h"
 #include "Texture.h"
@@ -8,8 +7,7 @@
 #include "Random.h"
 #include "Util.h"
 
-class Player : public Entity
-{
+class Player : public Entity {
 	float                   mSpeed;
 	float					mSpread;
 	int						mCannons;
@@ -42,5 +40,3 @@ public:
 	virtual void			Destroy();
 	virtual void			Shoot();
 };
-
-#endif

@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "System.h"
 
-//resolve externs
+// Resolve externs
 SDL_Rect Game::EnergyRect;
 
 const float MOVEMENT_FRICTION = 0.9F;
@@ -24,12 +24,11 @@ Player::Player(const Vec2& pos, const Texture* tex)
 	KillOnOffscreen = false;
 }
 
-bool Player::Update(float dt)
-{
-	//Dead players actually exist in limbo
+bool Player::Update(float dt) {
+	// Dead players actually exist in limbo
 	if (!Alive) return false;
 
-	//Health bar
+	// Health bar
 	SDL_Rect* rect = HealthRect();
 	rect->x = 5;
 	rect->y = 30;
@@ -39,7 +38,7 @@ bool Player::Update(float dt)
 	const Uint8* keys = System::GetKeyStates();
 	bool drain = false;
 
-	//It's not the length of the vector that counts, it's how you apply the force
+	// It's not the length of the vector that counts, it's how you apply the force
 	if (keys[SDL_SCANCODE_D]) {
 		Velocity.x += mSpeed * dt;
 		drain = true;
@@ -59,9 +58,9 @@ bool Player::Update(float dt)
 
 	ConfineToScreen();
 
-	//This isn't a true vacuum, the ship will stop eventually
-	//Player can barely move if they're out of energy
-	//Increase the final divisor to make the ship's slowdown take effect nearer to the end of energy
+	// This isn't a true vacuum, the ship will stop eventually
+	// Player can barely move if they're out of energy
+	// Increase the final divisor to make the ship's slowdown take effect nearer to the end of energy
 	float slow = ENERGY_MINIMUM / mEnergy / 3;
 	Velocity.x *= MOVEMENT_FRICTION - slow;
 	Velocity.y *= MOVEMENT_FRICTION - slow;
@@ -69,16 +68,16 @@ bool Player::Update(float dt)
 	Center.x += Velocity.x;
 	Center.y += Velocity.y;
 
-	//Finally handle shooting
+	// Finally handle shooting
 	if (keys[SDL_SCANCODE_SPACE]) {
 		Shoot();
 	}
 	else {
-		//Restore energy while not shooting
+		// Restore energy while not shooting
 		RestoreEnergy(ENERGY_RESTORE_PASSIVE);
 	}
 
-	//If the player moved during this frame, drain some energy
+	// If the player moved during this frame, drain some energy
 	if (drain) {
 		DrainEnergy(ENERGY_DRAIN_THRUSTERS + ENERGY_RESTORE_PASSIVE);
 	}
@@ -89,17 +88,18 @@ bool Player::Update(float dt)
 void Player::Shoot() {
 	Uint64 frameNo = System::GetFrameNumber();
 
-	//Energy drains regardless of jam
+	// Energy drains regardless of jam
 	DrainEnergy(ENERGY_DRAIN_SPINUP);
 
 	if (!CannonJammed() && frameNo % MISSILE_SPARSITY == 0) {
-		float spin = (float)frameNo / 50.F; //How fast cannons rotate around player
+		// How fast cannons rotate around player
+		float spin = (float)frameNo / 50.F;
 		double delta, vx, vy;
 
 		for (short i = 0; i++ < Cannons();) {
 			float rand = RandomFloatInclusive(0, Spread());
 
-			//Get location of equal amount of points around circle + some spin
+			// Get location of equal amount of points around circle + some spin
 			delta = 2 * M_PI * (i + spin + rand) / Cannons();
 			vx = sin(delta) * MissileSpeed();
 			vy = cos(delta) * MissileSpeed();
@@ -108,26 +108,27 @@ void Player::Shoot() {
 			missile->Velocity = Vec2((float)vx, (float)vy);
 			Game::Entities.push_back(missile);
 
-			//play missile shot sound
-			//First channel (0) is for enemy shots, which come much more infrequently than player shots, heh
+			// Play missile shot sound
+			// First channel (0) is for enemy shots, which come much more infrequently than player shots, heh
 			Mix_PlayChannel(frameNo % 63 + 1, Game::ShotSound, 0);
 
-			//Each missile damages the cannon slightly
+			// Each missile damages the cannon slightly
 			DrainEnergy(ENERGY_DRAIN_PER_BULLET);
 		}
 	}
 }
 
 void Player::Draw(SDL_Renderer* renderer) const {
-	//Do not draw dead players
+	// Do not draw dead players
 	if (!Alive) return;
 
 	Entity::Draw(renderer);
 }
 
 bool Player::CollidesWith(Entity* ent) const {
+	// TODO broken
 	std::cout << "checking player collide" << std::endl;
-	//Dead players are ghosts
+	// Dead players are ghosts
 	if (!Alive) return false;
 
 	return Entity::CollidesWith(ent);

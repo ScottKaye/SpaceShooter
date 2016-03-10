@@ -56,7 +56,7 @@ public:
 	float                   Width() const { return (float)mTex->GetWidth(); }
 	float                   Height() const { return (float)mTex->GetHeight(); }
 
-	//implementation-specific methods
+	// Implementation-specific methods
 	virtual bool			Update(float dt);
 	virtual void			Destroy();
 	virtual void			Draw(SDL_Renderer* renderer) const;

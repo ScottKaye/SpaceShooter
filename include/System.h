@@ -1,35 +1,31 @@
-#ifndef SYSTEM_H_
-#define SYSTEM_H_
+#pragma once
 
+#include <ctime>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
-#include <ctime>
 
-namespace System
-{
-    SDL_Window*     GetWindow();
-    int             GetWindowWidth();
-    int             GetWindowHeight();
+namespace System {
+	SDL_Window*     GetWindow();
+	int             GetWindowWidth();
+	int             GetWindowHeight();
 
-    void            SetWindowSize(int w, int h);
-    void            SetWindowTitle(const char* title);
+	void            SetWindowSize(int w, int h);
+	void            SetWindowTitle(const char* title);
 
-    SDL_Renderer*   GetRenderer();
-    const Uint8*    GetKeyStates();
+	SDL_Renderer*   GetRenderer();
+	const Uint8*    GetKeyStates();
 
-    float           GetTime();
-    float           GetTimeSinceLastFrame();
+	float           GetTime();
+	float           GetTimeSinceLastFrame();
 
-    Uint64          GetFrameNumber();
+	Uint64          GetFrameNumber();
 
-    void            Quit();
+	void            Quit();
 
-    void            Pause();
-    void            Unpause();
+	void            Pause();
+	void            Unpause();
 
-    bool            IsPaused();
+	bool            IsPaused();
 }
-
-#endif

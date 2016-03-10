@@ -15,7 +15,7 @@ Enemy::Enemy(const Vec2& pos, const Texture* tex)
 bool Enemy::Update(float dt) {
 	if (Entity::Update(dt)) return true;
 
-	//Randomly shoot
+	// Randomly shoot
 	if (RandomFloatInclusive(0, 1) < ENEMY_SHOOT_CHANCE) {
 		Shoot();
 	}

@@ -10,7 +10,6 @@
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\Texture.cpp" />
-    <ClCompile Include="src\Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation.h" />

@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "Entity.h"
 
-//resolve externs
+// Resolve externs
 unsigned Entity::mNextId;
 Mix_Chunk* Game::ShotSound;
 
@@ -18,7 +18,7 @@ Entity::Entity(const Vec2& pos, const Texture* tex, Team team)
 {
 }
 
-//Return true if the entity was destroyed this frame
+// Return true if the entity was destroyed this frame
 bool Entity::Update(float dt) {
 	++mLifetime;
 
@@ -31,9 +31,8 @@ bool Entity::Update(float dt) {
 		mHealthRect.w = (int)(mHealth / 100.F * Width());
 	}
 
-	//confine to screen
+	// Confine to screen
 	if (KillOnOffscreen && Lifetime() > (60 * 5) && OffScreen()) {
-		std::cout << "force killing " << GetId() << std::endl;
 		Game::DestroyEntityById(GetId());
 		return true;
 	}
@@ -71,9 +70,9 @@ void Entity::ConfineToScreen() {
 }
 
 void Entity::Draw(SDL_Renderer* renderer) const {
-	// check if we have a valid texture
+	// Check if we have a valid texture
 	if (mTex) {
-		// compute rectangle on screen
+		// Compute rectangle on screen
 		SDL_Rect screenRect;
 		screenRect.w = mTex->GetWidth();
 		screenRect.h = mTex->GetHeight();
@@ -82,10 +81,10 @@ void Entity::Draw(SDL_Renderer* renderer) const {
 
 		double angle = (atan2(Velocity.y, Velocity.x) * 180 / M_PI);
 
-		// draw textured rectangle
+		// Draw textured rectangle
 		SDL_RenderCopyEx(renderer, mTex->GetSDLTexture(), NULL, &screenRect, angle, NULL, SDL_FLIP_NONE);
 
-		// draw health bar
+		// Draw health bar
 		if (mHealthBarVisible) {
 			if (mHealth < 25.F) {
 				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 128);
@@ -100,7 +99,7 @@ void Entity::Draw(SDL_Renderer* renderer) const {
 		}
 	}
 	else {
-		// draw a placeholder
+		// Draw a placeholder
 		SDL_Rect screenRect;
 		screenRect.w = 64;
 		screenRect.h = 64;
@@ -116,7 +115,7 @@ bool Entity::CollidesWith(Entity* ent) const {
 	SDL_Rect r1 = { (int)Left(), (int)Top(), (int)Width(), (int)Height() };
 	SDL_Rect r2 = { (int)ent->Left(), (int)ent->Top(), (int)ent->Width(), (int)ent->Height() };
 
-	//This is to quiet the compiler about forcibly converting from SDL_bool to bool
+	// This is to quiet the compiler about forcibly converting from SDL_bool to bool
 	return SDL_HasIntersection(&r1, &r2) ? true : false;
 }
 
@@ -128,7 +127,7 @@ void Entity::Heal(float amount) {
 	}
 }
 
-//Returns true if the hit killed the entity
+// Returns true if the hit killed the entity
 bool Entity::Hit(float damage) {
 	mHealth -= damage;
 
@@ -142,7 +141,7 @@ bool Entity::Hit(float damage) {
 }
 
 void Entity::Explode() {
-	//Create an explosion at the current location
+	// Create an explosion at the current location
 	float scale = mExplosionSize * RandomFloatInclusive(0.85F, 1.15F);
 	Explosion* e = new Explosion(Center, Game::ExplosionTex, scale);
 	Game::Explosions.push_back(e);
@@ -162,6 +161,6 @@ void Entity::Shoot() {
 	missile->Velocity = Vec2(Velocity.x * 2 * spreadX, Velocity.y * 2 * spreadY);
 	Game::Entities.push_back(missile);
 
-	//play missile shot sound
+	// Play missile shot sound
 	Mix_PlayChannel(0, Game::ShotSound, 0);
 }

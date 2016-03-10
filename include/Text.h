@@ -1,8 +1,8 @@
 #pragma once
 
+#include <string>
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include <string>
 
 #include "System.h"
 #include "Game.h"
@@ -29,6 +29,7 @@ public:
 		SDL_RenderCopy(renderer, mTex, NULL, &mRect);
 	}
 
+	// Creates, draws, and cleans up a text element
 	static void InstantDraw(std::string str, Vec2 pos, TTF_Font* font, SDL_Color col, SDL_Renderer* renderer) {
 		Text* t = new Text(str, pos, font, col, renderer);
 		t->Draw(renderer);

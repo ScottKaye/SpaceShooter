@@ -92,7 +92,6 @@ xcopy "$(SolutionDir)\media" "$(TargetDir)\media" /e /y /i /r</Command>
     <ClCompile Include="src\Explosion.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Missile.cpp" />
-    <ClCompile Include="src\Vec2.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\System.cpp" />
     <ClCompile Include="src\Texture.cpp" />
