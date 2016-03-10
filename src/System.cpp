@@ -1,5 +1,8 @@
-#include <iostream>
+#ifdef _DEBUG
 #include <vld.h>
+#endif
+
+#include <iostream>
 
 #include "System.h"
 #include "Timer.h"
@@ -223,6 +226,6 @@ int main(int argc, char** argv) {
 	Mix_Quit();
 	SDL_Quit();
 
-	std::cout << "Goodbye!" << std::endl;
+	std::cout << "## Goodbye!" << std::endl;
 	return 0;
 }

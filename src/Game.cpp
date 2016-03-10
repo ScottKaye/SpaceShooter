@@ -24,7 +24,7 @@ Game::Game()
 { }
 
 bool Game::Initialize() {
-	std::cout << "Initializing game" << std::endl;
+	std::cout << "## Initializing game." << std::endl;
 
 	// Set some window properties
 	System::SetWindowSize(480, 640);
@@ -71,7 +71,7 @@ bool Game::Initialize() {
 }
 
 void Game::Shutdown() {
-	std::cout << "Shutting down game" << std::endl;
+	std::cout << "## Shutting down game." << std::endl;
 
 	// Delete entities
 	for (unsigned i = 0; i < Entities.size(); ++i) {
@@ -270,7 +270,6 @@ void Game::OnKeyDown(const SDL_KeyboardEvent& kbe) {
 		break;
 	case SDLK_h:
 		if (MainPlayer->Health() < 100 && MainPlayer->Energy() > 50) {
-			std::cout << "heal" << std::endl;
 			MainPlayer->Heal(25);
 			MainPlayer->DrainEnergy(50);
 		}

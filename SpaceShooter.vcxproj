@@ -63,8 +63,7 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(SolutionDir)libfreetype-6.dll" "$(TargetDir)\libfreetype-6.dll"
-xcopy "$(SolutionDir)\media" "$(TargetDir)\media" /e /y /i /r</Command>
+      <Command>copy /Y "$(SolutionDir)libfreetype-6.dll" "$(TargetDir)\libfreetype-6.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,6 +84,9 @@ xcopy "$(SolutionDir)\media" "$(TargetDir)\media" /e /y /i /r</Command>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)libfreetype-6.dll" "$(TargetDir)\libfreetype-6.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Animation.cpp" />

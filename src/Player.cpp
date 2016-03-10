@@ -133,8 +133,6 @@ void Player::RestoreEnergy(float amount) {
 }
 
 void Player::Destroy() {
-	std::cout << "Player destroyed!" << std::endl;
-
 	Alive = false;
 	SetHealth(0);
 	Game::DestroyPlayer();
