@@ -14,6 +14,13 @@ This project is also set up to use [Visual Leak Detector](https://vld.codeplex.c
 
 You may also need to add `$(SolutionDir)\include` to Visual Studio's include path list, if this is not configured globally already.
 
+## Controls
+- W A S D Movement
+- B to show hit**b**oxes
+- R to reset/restart game
+- Up arrow to increase number of cannons by 1 (only when energy is 100%, will consume all energy)
+- Down arrow to reduce number of cannons by 1 (restores all energy instantly)
+
 ## Credits
 Thank you to each of these resources:
 
