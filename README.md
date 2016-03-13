@@ -12,6 +12,8 @@ Make sure the include paths and libraries are set up in your build properties.
 
 This project is also set up to use [Visual Leak Detector](https://vld.codeplex.com/) to find leaks.  It will run in Debug mode, with output appearing in VS's Output window.
 
+You may also need to add `$(SolutionDir)\include` to Visual Studio's include path list, if this is not configured globally already.
+
 ## Credits
 Thank you to each of these resources:
 
